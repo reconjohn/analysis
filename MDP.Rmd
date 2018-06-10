@@ -1,7 +1,7 @@
 ---
 title: "Shared bike allocation in equity using MDP"
 author: "Yohan Min"
-date: "2018-06-01"
+date: "2018-06-02"
 header-includes:
 - \usepackage{float}
 - \floatplacement{figure}{H}
