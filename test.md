@@ -1,4 +1,4 @@
-Assignment 04: Shared mobility service
+Shared mobility service
 ================
 Yohan Min
 2018-05-31
@@ -59,7 +59,7 @@ Non-linear optimizations could be used to simulate the situation to figure out t
 
 ![Utilization and relative population of neighbors](test_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
-It is found that the equity oriented policy distributes bikes to all the neighborhoods while the efficiency oriented policy focuses only on half neighborhoods to maximize profits. In this simulation, the efficiency oriented policy will result in a profit of $1.2 in millions a year. On the other hand, the equity oriented policy will end up with $15 in thousands a year. This result is interesting because the total profit changes depending on how different portion of resources or bikes are put into individual neighborhoods. It also shows that it is possible to expedite the break-even point earlier by putting the different number of bikes to the individual neighborhoods.
+It is found that the equity oriented policy distributes bikes to all the neighborhoods while the efficiency oriented policy focuses only on half neighborhoods to maximize profits. In this simulation, the efficiency oriented policy will result in a profit of $1.2 in millions a year. On the other hand, the equity oriented policy will end up with $14.2 in thousands a year. This result is interesting because the total profit changes depending on how different portion of resources or bikes are put into individual neighborhoods. It also shows that it is possible to expedite the break-even point earlier by putting the different number of bikes to the individual neighborhoods.
 
 ![Efficiency and equity policies](test_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
