@@ -59,7 +59,7 @@ Non-linear optimizations could be used to simulate the situation to figure out t
 
 ![Utilization and relative population of neighbors](test_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
-It is found that the equity oriented policy distributes bikes to all the neighborhoods while the efficiency oriented policy focuses only on half neighborhoods to maximize profits. In this simulation, the efficiency oriented policy will result in a profit of $1.2 in millions a year. On the other hand, the equity oriented policy will end up with $14.2 in thousands a year. This result is interesting because the total profit changes depending on how different portion of resources or bikes are put into individual neighborhoods. It also shows that it is possible to expedite the break-even point earlier by putting the different number of bikes to the individual neighborhoods.
+It is found that the equity oriented policy distributes bikes to all the neighborhoods while the efficiency oriented policy focuses only on half neighborhoods to maximize profits. In this simulation, the efficiency oriented policy will result in a profit of $1.2 in millions a year. On the other hand, the equity oriented policy will end up with $14.3 in thousands a year. This result is interesting because the total profit changes depending on how different portion of resources or bikes are put into individual neighborhoods. It also shows that it is possible to expedite the break-even point earlier by putting the different number of bikes to the individual neighborhoods.
 
 ![Efficiency and equity policies](test_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
@@ -70,11 +70,66 @@ Let's imagine which policy would be preferred to distribute the limited bikes gi
 
 To figure out which policy would work better in a long run, Markov decision processes (MDP) was used for simulations. As described above, there is 700,000 people in Seattle and almost 9,000 dockless bikes with 3 competitors in this market. Let's assume there are 8 neighborhoods in Seattle and we need to distribute our bikes (only 3,000 considering a third market share) to these 8 neighborhoods. Each neighborhood has different utilization rates which keep changing every year, let's say there are only 4 states with the different utilization rates for each neighborhood. Each state features weighted concentration of utilization structures. State 1 and 4 are the ones with evenly distributed utilization while state 2 and 3 feature biased distribution of utilization rates. State 1 represents a situation where all neighborhoods have the same utilization rate that there is no difference. State 2 represents a biased utilization distribution that those neighborhoods indexed later, have higher utilization. State 3 is opposite that neighborhoods indexed earlier have higher ones while later indexed neighborhoods have zero utilization that means there is no demand for the shared bike. State 4 is the same as the state 1 that evenly distributed utilization but lower.
 
+|         |  nb 1|  nb 2|  nb 3|  nb 4|  nb 5|  nb 6|  nb 7|  nb 8|
+|:--------|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
+| state 1 |   0.8|   0.8|   0.8|   0.8|   0.8|   0.8|   0.8|   0.8|
+| state 2 |   0.1|   0.1|   0.1|   0.1|   0.1|   1.4|   2.0|   2.5|
+| state 3 |   4.0|   2.0|   0.4|   0.0|   0.0|   0.0|   0.0|   0.0|
+| state 4 |   0.3|   0.3|   0.3|   0.3|   0.3|   0.3|   0.3|   0.3|
+
 There is a constraint of a upper bound that each neighborhood can't have bikes of more than 1% of it's population such that having bikes of more than 1% population would change the utilization rate. For the purpose of faster calculation all the computational values were scaled down to 1/100 that the population of Seattle, 700,000 became down to 7,000 and the number of bike for distribution, 3,000 became down to 30 bikes. The transition probability for one state to the other one is decided by policies. If our current state is on the equity oriented policy, then our next state would be 80% of state 1, and 10% of both state 2 and 3. This implies having equity oriented policy, overall, maintains the similar amount of utilization rates over the neighborhoods. On the other hand, if we are not on efficiency oriented policy, the next state would be most likely to the state 4 where all the utilization rates are lower but evenly distributed. This is because having the business in a few neighbors and putting most of resources in a certain area endangers and poses an obstacle to sustain the business.
 
 Nonetheless, the results show that mostly efficiency oriented policy is dominant over equity oriented policy. It is because the expected pay off on the efficiency oriented policy is far more. It may be necessary to mandate the company to execute the equity oriented policy in cooperation with the city government like the case of the pilot program where it recommended for bikeshare companies to have services at least 20% of the Tier 1 priority hire neighborhoods.
 
 ![](test_files/figure-markdown_github/unnamed-chunk-8-1.png)
+
+|  Year|    state.1|    state.2|     state.3|    state.4|
+|-----:|----------:|----------:|-----------:|----------:|
+|     1|  133757.36|  138738.68|  130521.419|  126157.93|
+|     2|  125250.92|  127185.61|  122993.468|  121863.36|
+|     3|  121125.87|  123246.78|  115455.695|  113546.08|
+|     4|  112805.17|  114084.41|  108319.606|  107224.87|
+|     5|  106035.47|  110376.58|  102691.621|   98601.04|
+|     6|   97042.85|  103137.03|   95209.051|   94131.63|
+|     7|   92955.90|   94978.40|   89876.195|   86756.34|
+|     8|   85546.56|   89831.38|   82071.370|   80850.39|
+|     9|   79545.58|   84440.27|   77145.571|   73041.71|
+|    10|   71517.88|   76909.09|   70664.057|   68222.31|
+|    11|   66618.32|   73529.56|   65563.403|   62076.49|
+|    12|   60304.36|   67431.39|   60089.180|   57604.38|
+|    13|   56105.87|   60938.41|   53168.364|   51260.40|
+|    14|   49599.73|   56753.17|   48431.529|   44408.99|
+|    15|   42480.26|   45867.97|   41412.469|   40534.25|
+|    16|   39027.23|   45202.95|   36973.960|   31920.65|
+|    17|   30509.07|   33116.67|   29370.534|   28217.03|
+|    18|   27264.18|   29993.00|   23455.448|   18393.08|
+|    19|   16879.93|   19797.06|   15624.691|   14496.53|
+|    20|   13693.87|   16005.70|    9077.779|    3284.87|
+
+|  Year|  state.1|  state.2|  state.3|  state.4|
+|-----:|--------:|--------:|--------:|--------:|
+|     1|        2|        2|        2|        1|
+|     2|        2|        2|        1|        1|
+|     3|        2|        2|        2|        1|
+|     4|        2|        2|        1|        1|
+|     5|        2|        2|        2|        1|
+|     6|        2|        2|        2|        1|
+|     7|        2|        2|        2|        1|
+|     8|        2|        2|        2|        1|
+|     9|        2|        2|        2|        1|
+|    10|        2|        2|        2|        1|
+|    11|        2|        2|        2|        1|
+|    12|        2|        2|        2|        1|
+|    13|        2|        2|        2|        1|
+|    14|        2|        2|        2|        2|
+|    15|        1|        2|        1|        1|
+|    16|        2|        2|        2|        2|
+|    17|        1|        2|        1|        1|
+|    18|        2|        2|        2|        1|
+|    19|        2|        2|        1|        1|
+|    20|        2|        2|        2|        2|
+
+**Note:** <sup>\*</sup> 1 for equity; 2 for efficiency policy
 
 Interestingly, most of state 4 indicates equity oriented policy is optimal than the counterpart policy. It is because choosing the policy focusing on equity will improve the overall utilization rates on following states. It is quite intuitive that if a business is in a bad way, that is the time to invest for improving capacities and overall business conditions rather than seeking profits. We can see state 2 and 3 are more biased as expected with the probability distributions. Comparatively state 1 and 4 shows somehow stable distributions. All of the results could be interpreted with 100 multiplication as the data was scaled down (e.g. if number of bike is 10, then interpret it as 1,000) for the estimation in the real world.
 
